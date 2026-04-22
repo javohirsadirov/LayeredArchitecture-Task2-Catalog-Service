@@ -1,0 +1,23 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net9.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <RootNamespace>LayeredArchitecture_Task2_Catalog_Service</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="9.0.7">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\LayeredArchitecture-Task2-Catalog-Service.Business\LayeredArchitecture-Task2-Catalog-Service.Business.csproj" />
+    <ProjectReference Include="..\LayeredArchitecture-Task2-Catalog-Service.Dtos\LayeredArchitecture-Task2-Catalog-Service.Dtos.csproj" />
+    <ProjectReference Include="..\LayeredArchitecture-Task2-Catalog-Service.Repository\LayeredArchitecture-Task2-Catalog-Service.Repository.csproj" />
+  </ItemGroup>
+
+</Project>

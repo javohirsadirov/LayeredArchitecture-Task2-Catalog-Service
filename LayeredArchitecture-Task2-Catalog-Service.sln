@@ -1,0 +1,49 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.14.37111.16
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LayeredArchitecture-Task2-Catalog-Service.API", "LayeredArchitecture-Task2-Catalog-Service\LayeredArchitecture-Task2-Catalog-Service.API.csproj", "{44D6A3BA-7656-4D92-92B0-5AB2B11B8B49}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LayeredArchitecture-Task2-Catalog-Service.Dtos", "LayeredArchitecture-Task2-Catalog-Service.Dtos\LayeredArchitecture-Task2-Catalog-Service.Dtos.csproj", "{424714CD-B92A-43EF-850C-1ABD3E4723D2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LayeredArchitecture-Task2-Catalog-Service.Business", "LayeredArchitecture-Task2-Catalog-Service.Business\LayeredArchitecture-Task2-Catalog-Service.Business.csproj", "{54E96476-9F73-4BD4-B159-E5CBCDF33B0B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LayeredArchitecture-Task2-Catalog-Service.Repository", "LayeredArchitecture-Task2-Catalog-Service.Repository\LayeredArchitecture-Task2-Catalog-Service.Repository.csproj", "{D145BEAC-E2D4-4F27-8F31-73070AB6C252}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LayeredArchitecture-Task2-Catalog-Service.Tests", "LayeredArchitecture-Task2-Catalog-Service.Tests\LayeredArchitecture-Task2-Catalog-Service.Tests.csproj", "{777E45FD-66FD-4F7B-BF3A-27AB27775B21}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{44D6A3BA-7656-4D92-92B0-5AB2B11B8B49}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{44D6A3BA-7656-4D92-92B0-5AB2B11B8B49}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{44D6A3BA-7656-4D92-92B0-5AB2B11B8B49}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{44D6A3BA-7656-4D92-92B0-5AB2B11B8B49}.Release|Any CPU.Build.0 = Release|Any CPU
+		{424714CD-B92A-43EF-850C-1ABD3E4723D2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{424714CD-B92A-43EF-850C-1ABD3E4723D2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{424714CD-B92A-43EF-850C-1ABD3E4723D2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{424714CD-B92A-43EF-850C-1ABD3E4723D2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{54E96476-9F73-4BD4-B159-E5CBCDF33B0B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{54E96476-9F73-4BD4-B159-E5CBCDF33B0B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{54E96476-9F73-4BD4-B159-E5CBCDF33B0B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{54E96476-9F73-4BD4-B159-E5CBCDF33B0B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D145BEAC-E2D4-4F27-8F31-73070AB6C252}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D145BEAC-E2D4-4F27-8F31-73070AB6C252}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D145BEAC-E2D4-4F27-8F31-73070AB6C252}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D145BEAC-E2D4-4F27-8F31-73070AB6C252}.Release|Any CPU.Build.0 = Release|Any CPU
+		{777E45FD-66FD-4F7B-BF3A-27AB27775B21}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{777E45FD-66FD-4F7B-BF3A-27AB27775B21}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{777E45FD-66FD-4F7B-BF3A-27AB27775B21}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{777E45FD-66FD-4F7B-BF3A-27AB27775B21}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {DA44E3F4-541B-4059-8E6A-44B58322944B}
+	EndGlobalSection
+EndGlobal
