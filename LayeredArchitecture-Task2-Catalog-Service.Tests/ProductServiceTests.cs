@@ -47,7 +47,7 @@ public class ProductServiceTests
             new() { Id = 1, Name = "Laptop", CategoryId = 1, Price = 999.99m, Amount = 5 },
             new() { Id = 2, Name = "Mouse", CategoryId = 1, Price = 29.99m, Amount = 100 }
         };
-        _productRepositoryMock.Setup(r => r.GetList()).ReturnsAsync(products);
+        _productRepositoryMock.Setup(r => r.GetList(It.IsAny<int?>(), It.IsAny<int>(), It.IsAny<int>())).ReturnsAsync(products);
 
         var result = await _productService.GetList();
 

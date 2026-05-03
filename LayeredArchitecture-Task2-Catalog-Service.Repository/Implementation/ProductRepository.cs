@@ -27,9 +27,17 @@ internal class ProductRepository(CatalogDbContext context) : IProductRepository
             ?? throw new KeyNotFoundException($"Product with id {id} not found.");
     }
 
-    public async Task<List<Product>> GetList()
+    public async Task<List<Product>> GetList(int? categoryId = null, int page = 1, int pageSize = 10)
     {
-        return await context.Products.ToListAsync();
+        var query = context.Products.AsQueryable();
+
+        if (categoryId.HasValue)
+            query = query.Where(p => p.CategoryId == categoryId.Value);
+
+        return await query
+            .Skip((page - 1) * pageSize)
+            .Take(pageSize)
+            .ToListAsync();
     }
 
     public async Task Update(Product product)

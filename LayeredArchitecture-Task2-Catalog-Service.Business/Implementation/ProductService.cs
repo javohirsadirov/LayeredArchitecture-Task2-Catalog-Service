@@ -40,9 +40,9 @@ internal class ProductService(IProductRepository productRepository) : IProductSe
         };
     }
 
-    public async Task<List<ProductDto>> GetList()
+    public async Task<List<ProductDto>> GetList(int? categoryId = null, int page = 1, int pageSize = 10)
     {
-        var products = await productRepository.GetList();
+        var products = await productRepository.GetList(categoryId, page, pageSize);
         return products.Select(product => new ProductDto
         {
             Id = product.Id,
