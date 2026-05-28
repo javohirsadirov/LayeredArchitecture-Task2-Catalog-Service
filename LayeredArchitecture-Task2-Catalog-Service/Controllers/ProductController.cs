@@ -26,16 +26,16 @@ public class ProductController(IProductService productService) : ControllerBase
         if (result == null)
             return NotFound();
 
+        var links = new List<LinkDto>();
+        AddLink(links, Url.Link(nameof(GetProductById), new { id }), "self", "GET");
+        AddLink(links, Url.Link(nameof(UpdateProduct), null), "update_product", "PUT");
+        AddLink(links, Url.Link(nameof(DeleteProduct), new { id }), "delete_product", "DELETE");
+        AddLink(links, Url.Link(nameof(GetProducts), null), "all_products", "GET");
+
         var response = new LinkedResourceDto<ProductDto>
         {
             Data = result,
-            Links =
-            [
-                new LinkDto { Href = Url.Link(nameof(GetProductById), new { id })!, Rel = "self", Method = "GET" },
-                new LinkDto { Href = Url.Link(nameof(UpdateProduct), null)!, Rel = "update_product", Method = "PUT" },
-                new LinkDto { Href = Url.Link(nameof(DeleteProduct), new { id })!, Rel = "delete_product", Method = "DELETE" },
-                new LinkDto { Href = Url.Link(nameof(GetProducts), null)!, Rel = "all_products", Method = "GET" }
-            ]
+            Links = links
         };
 
         return Ok(response);
@@ -50,8 +50,14 @@ public class ProductController(IProductService productService) : ControllerBase
     /// <returns>A list of products.</returns>
     [HttpGet(Name = nameof(GetProducts))]
     [ProducesResponseType(typeof(List<ProductDto>), StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
     public async Task<IActionResult> GetProducts([FromQuery] int? categoryId, [FromQuery] int page = 1, [FromQuery] int pageSize = 10)
     {
+        if (page < 1)
+            return BadRequest("Page must be greater than or equal to 1.");
+        if (pageSize < 1 || pageSize > 50)
+            return BadRequest("PageSize must be between 1 and 50.");
+
         var result = await productService.GetList(categoryId, page, pageSize);
         return Ok(result);
     }
@@ -95,5 +101,11 @@ public class ProductController(IProductService productService) : ControllerBase
     {
         await productService.Delete(id);
         return NoContent();
+    }
+
+    private static void AddLink(List<LinkDto> links, string? href, string rel, string method)
+    {
+        if (href is not null)
+            links.Add(new LinkDto { Href = href, Rel = rel, Method = method });
     }
 }

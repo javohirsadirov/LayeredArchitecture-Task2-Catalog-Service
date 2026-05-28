@@ -85,4 +85,21 @@ public class ProductRepositoryIntegrationTests
         Assert.ThrowsAsync<KeyNotFoundException>(async () =>
             await _productRepository.GetById((int)product.Id));
     }
+
+    [Test]
+    public async Task DeleteCategory_CascadeDeletesRelatedProducts()
+    {
+        var category = await CreateTestCategory();
+        var product1 = new Product { Name = "Product1", CategoryId = category.Id, Price = 10m, Amount = 1 };
+        var product2 = new Product { Name = "Product2", CategoryId = category.Id, Price = 20m, Amount = 2 };
+        await _productRepository.Create(product1);
+        await _productRepository.Create(product2);
+
+        await _categoryRepository.Delete((int)category.Id);
+
+        Assert.ThrowsAsync<KeyNotFoundException>(async () =>
+            await _productRepository.GetById((int)product1.Id));
+        Assert.ThrowsAsync<KeyNotFoundException>(async () =>
+            await _productRepository.GetById((int)product2.Id));
+    }
 }

@@ -26,16 +26,16 @@ public class CategoryController(ICategoryService categoryService) : ControllerBa
         if (result == null)
             return NotFound();
 
+        var links = new List<LinkDto>();
+        AddLink(links, Url.Link(nameof(GetCategoryById), new { id }), "self", "GET");
+        AddLink(links, Url.Link(nameof(UpdateCategory), null), "update_category", "PUT");
+        AddLink(links, Url.Link(nameof(DeleteCategory), new { id }), "delete_category", "DELETE");
+        AddLink(links, Url.Link(nameof(GetCategories), null), "all_categories", "GET");
+
         var response = new LinkedResourceDto<CategoryDto>
         {
             Data = result,
-            Links =
-            [
-                new LinkDto { Href = Url.Link(nameof(GetCategoryById), new { id })!, Rel = "self", Method = "GET" },
-                new LinkDto { Href = Url.Link(nameof(UpdateCategory), null)!, Rel = "update_category", Method = "PUT" },
-                new LinkDto { Href = Url.Link(nameof(DeleteCategory), new { id })!, Rel = "delete_category", Method = "DELETE" },
-                new LinkDto { Href = Url.Link(nameof(GetCategories), null)!, Rel = "all_categories", Method = "GET" }
-            ]
+            Links = links
         };
 
         return Ok(response);
@@ -92,5 +92,11 @@ public class CategoryController(ICategoryService categoryService) : ControllerBa
     {
         await categoryService.Delete(id);
         return NoContent();
+    }
+
+    private static void AddLink(List<LinkDto> links, string? href, string rel, string method)
+    {
+        if (href is not null)
+            links.Add(new LinkDto { Href = href, Rel = rel, Method = method });
     }
 }
