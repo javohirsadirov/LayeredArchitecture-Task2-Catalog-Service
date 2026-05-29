@@ -17,6 +17,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\LayeredArchitecture-Task2-Catalog-Service.Dtos\LayeredArchitecture-Task2-Catalog-Service.Dtos.csproj" />
+    <ProjectReference Include="..\LayeredArchitecture-Task2-Catalog-Service.MessageQueue\LayeredArchitecture-Task2-Catalog-Service.MessageQueue.csproj" />
     <ProjectReference Include="..\LayeredArchitecture-Task2-Catalog-Service.Repository\LayeredArchitecture-Task2-Catalog-Service.Repository.csproj" />
   </ItemGroup>
 

@@ -1,7 +1,10 @@
 using LayeredArchitecture_Task2_Catalog_Service.Business.Implementation;
 using LayeredArchitecture_Task2_Catalog_Service.Business.Interfaces;
 using LayeredArchitecture_Task2_Catalog_Service.Dtos.Product;
+using LayeredArchitecture_Task2_Catalog_Service.MessageQueue;
+using LayeredArchitecture_Task2_Catalog_Service.MessageQueue.Interfaces;
 using LayeredArchitecture_Task2_Catalog_Service.Repository.Models;
+using Microsoft.Extensions.Options;
 using Moq;
 
 namespace LayeredArchitecture_Task2_Catalog_Service.Tests;
@@ -10,13 +13,24 @@ namespace LayeredArchitecture_Task2_Catalog_Service.Tests;
 public class ProductServiceTests
 {
     private Mock<IProductRepository> _productRepositoryMock;
+    private Mock<IMessagePublisher> _messagePublisherMock;
     private IProductService _productService;
 
     [SetUp]
     public void SetUp()
     {
         _productRepositoryMock = new Mock<IProductRepository>();
-        _productService = new ProductService(_productRepositoryMock.Object);
+        _messagePublisherMock = new Mock<IMessagePublisher>();
+        var rabbitOptions = Options.Create(new RabbitMQOptions
+        {
+            ProductUpdated = new ProductUpdatedSettings
+            {
+                Exchange = "catalog.exchange",
+                Queue = "cart.update.queue",
+                RoutingKey = "catalog.item.updated"
+            }
+        });
+        _productService = new ProductService(_productRepositoryMock.Object, _messagePublisherMock.Object, rabbitOptions);
     }
 
     [Test]
@@ -59,7 +73,7 @@ public class ProductServiceTests
     [Test]
     public async Task Create_CallsRepositoryCreate()
     {
-        var dto = new ProductDto
+        var dto = new CreateProductDto
         {
             Name = "Keyboard", CategoryId = 1, Price = 49.99m, Amount = 50
         };

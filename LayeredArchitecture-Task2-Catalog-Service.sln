@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LayeredArchitecture-Task2-C
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LayeredArchitecture-Task2-Catalog-Service.Tests", "LayeredArchitecture-Task2-Catalog-Service.Tests\LayeredArchitecture-Task2-Catalog-Service.Tests.csproj", "{777E45FD-66FD-4F7B-BF3A-27AB27775B21}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LayeredArchitecture-Task2-Catalog-Service.MessageQueue", "LayeredArchitecture-Task2-Catalog-Service.MessageQueue\LayeredArchitecture-Task2-Catalog-Service.MessageQueue.csproj", "{43B417D8-0B69-471F-8B68-8582A838C219}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{777E45FD-66FD-4F7B-BF3A-27AB27775B21}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{777E45FD-66FD-4F7B-BF3A-27AB27775B21}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{777E45FD-66FD-4F7B-BF3A-27AB27775B21}.Release|Any CPU.Build.0 = Release|Any CPU
+		{43B417D8-0B69-471F-8B68-8582A838C219}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{43B417D8-0B69-471F-8B68-8582A838C219}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{43B417D8-0B69-471F-8B68-8582A838C219}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{43B417D8-0B69-471F-8B68-8582A838C219}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

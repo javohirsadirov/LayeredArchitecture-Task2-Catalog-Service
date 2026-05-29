@@ -1,7 +1,9 @@
 using LayeredArchitecture_Task2_Catalog_Service.Business;
+using LayeredArchitecture_Task2_Catalog_Service.MessageQueue;
 using System.Reflection;
 using LayeredArchitecture_Task2_Catalog_Service.Repository;
 using Microsoft.OpenApi.Models;
+using LayeredArchitecture_Task2_Catalog_Service.MessageQueue.Interfaces;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -11,6 +13,9 @@ builder.Services.AddControllers();
 
 builder.Services.AddBusinessServices();
 builder.Services.AddRepositoryServices(builder.Configuration);
+
+builder.Services.Configure<RabbitMQOptions>(builder.Configuration.GetSection(RabbitMQOptions.SectionName));
+builder.Services.AddMessageQueue();
 
 builder.Services.AddOpenApi();
 builder.Services.AddEndpointsApiExplorer();
@@ -28,6 +33,9 @@ builder.Services.AddSwaggerGen(options =>
 });
 
 var app = builder.Build();
+
+// Force RabbitMQ connection and topology creation at startup
+app.Services.GetRequiredService<IMessagePublisher>();
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())

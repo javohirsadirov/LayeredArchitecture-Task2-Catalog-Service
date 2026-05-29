@@ -40,9 +40,14 @@ internal class ProductRepository(CatalogDbContext context) : IProductRepository
             .ToListAsync();
     }
 
-    public async Task Update(Product product)
+    public async Task<bool> Update(Product product)
     {
-        context.Products.Update(product);
-        await context.SaveChangesAsync();
+        var existing = await context.Products.FindAsync(product.Id);
+        if (existing is null)
+            return false;
+
+        context.Entry(existing).CurrentValues.SetValues(product);
+        var affectedRows = await context.SaveChangesAsync();
+        return affectedRows > 0;
     }
 }

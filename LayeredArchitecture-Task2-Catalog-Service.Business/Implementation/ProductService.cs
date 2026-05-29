@@ -1,23 +1,30 @@
 ﻿using LayeredArchitecture_Task2_Catalog_Service.Business.Interfaces;
 using LayeredArchitecture_Task2_Catalog_Service.Dtos.Product;
+using LayeredArchitecture_Task2_Catalog_Service.MessageQueue;
+using LayeredArchitecture_Task2_Catalog_Service.MessageQueue.Interfaces;
 using LayeredArchitecture_Task2_Catalog_Service.Repository.Models;
+using Microsoft.Extensions.Options;
 
 namespace LayeredArchitecture_Task2_Catalog_Service.Business.Implementation;
 
-internal class ProductService(IProductRepository productRepository) : IProductService
+internal class ProductService(IProductRepository productRepository,
+    IMessagePublisher messagePublisher,
+    IOptions<RabbitMQOptions> rabbitMQOptions) : IProductService
 {
-    public async Task Create(ProductDto productDto)
+    private readonly ProductUpdatedSettings _productUpdatedSettings = rabbitMQOptions.Value.ProductUpdated;
+    public async Task<long> Create(CreateProductDto productDto)
     {
-        await productRepository.Create(new Product
+        var product = new Product
         {
-            Id = productDto.Id,
             Name = productDto.Name,
             Description = productDto.Description,
             Price = productDto.Price,
             CategoryId = productDto.CategoryId,
             Amount = productDto.Amount,
             ImageURL = productDto.ImageURL
-        });
+        };
+        await productRepository.Create(product);
+        return product.Id;
     }
 
     public async Task Delete(int id)
@@ -57,7 +64,7 @@ internal class ProductService(IProductRepository productRepository) : IProductSe
 
     public async Task Update(ProductDto productDto)
     {
-        await productRepository.Update(new Product
+        var updated = await productRepository.Update(new Product
         {
             Id = productDto.Id,
             Name = productDto.Name,
@@ -67,5 +74,21 @@ internal class ProductService(IProductRepository productRepository) : IProductSe
             Amount = productDto.Amount,
             ImageURL = productDto.ImageURL
         });
+
+        if (updated)
+        {
+            await messagePublisher.PublishAsync(
+                _productUpdatedSettings.Exchange,
+                _productUpdatedSettings.RoutingKey,
+                new
+                {
+                    Event = "ProductUpdated",
+                    productDto.Id,
+                    productDto.Name,
+                    productDto.Price,
+                    productDto.CategoryId,
+                    Timestamp = DateTime.UtcNow
+                });
+        }
     }
 }
