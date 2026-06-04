@@ -1,6 +1,7 @@
 using LayeredArchitecture_Task2_Catalog_Service.Business.Interfaces;
 using LayeredArchitecture_Task2_Catalog_Service.Dtos;
 using LayeredArchitecture_Task2_Catalog_Service.Dtos.Product;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace LayeredArchitecture_Task2_Catalog_Service.Controllers;
@@ -9,6 +10,7 @@ namespace LayeredArchitecture_Task2_Catalog_Service.Controllers;
 /// Manages catalog products.
 /// </summary>
 [ApiController]
+[Authorize]
 [Route("api/[controller]")]
 public class ProductController(IProductService productService) : ControllerBase
 {
@@ -18,6 +20,7 @@ public class ProductController(IProductService productService) : ControllerBase
     /// <param name="id">The product identifier.</param>
     /// <returns>The product with HATEOAS links.</returns>
     [HttpGet("{id}", Name = nameof(GetProductById))]
+    [Authorize(Roles = "Manager,Customer")]
     [ProducesResponseType(typeof(LinkedResourceDto<ProductDto>), StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     public async Task<IActionResult> GetProductById(int id)
@@ -49,6 +52,7 @@ public class ProductController(IProductService productService) : ControllerBase
     /// <param name="pageSize">Number of items per page (default: 10).</param>
     /// <returns>A list of products.</returns>
     [HttpGet(Name = nameof(GetProducts))]
+    [Authorize(Roles = "Manager,Customer")]
     [ProducesResponseType(typeof(List<ProductDto>), StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     public async Task<IActionResult> GetProducts([FromQuery] int? categoryId, [FromQuery] int page = 1, [FromQuery] int pageSize = 10)
@@ -68,6 +72,7 @@ public class ProductController(IProductService productService) : ControllerBase
     /// <param name="productDto">The product data.</param>
     /// <returns>The created product.</returns>
     [HttpPost(Name = nameof(CreateProduct))]
+    [Authorize(Roles = "Manager")]
     [ProducesResponseType(typeof(ProductDto), StatusCodes.Status201Created)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     public async Task<IActionResult> CreateProduct(CreateProductDto productDto)
@@ -81,6 +86,7 @@ public class ProductController(IProductService productService) : ControllerBase
     /// </summary>
     /// <param name="productDto">The updated product data.</param>
     [HttpPut(Name = nameof(UpdateProduct))]
+    [Authorize(Roles = "Manager")]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
@@ -95,6 +101,7 @@ public class ProductController(IProductService productService) : ControllerBase
     /// </summary>
     /// <param name="id">The product identifier.</param>
     [HttpDelete("{id}", Name = nameof(DeleteProduct))]
+    [Authorize(Roles = "Manager")]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     public async Task<IActionResult> DeleteProduct(int id)

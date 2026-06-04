@@ -1,6 +1,7 @@
 using LayeredArchitecture_Task2_Catalog_Service.Business.Interfaces;
 using LayeredArchitecture_Task2_Catalog_Service.Dtos;
 using LayeredArchitecture_Task2_Catalog_Service.Dtos.Category;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace LayeredArchitecture_Task2_Catalog_Service.Controllers;
@@ -9,6 +10,7 @@ namespace LayeredArchitecture_Task2_Catalog_Service.Controllers;
 /// Manages catalog categories.
 /// </summary>
 [ApiController]
+[Authorize]
 [Route("api/[controller]")]
 public class CategoryController(ICategoryService categoryService) : ControllerBase
 {
@@ -18,6 +20,7 @@ public class CategoryController(ICategoryService categoryService) : ControllerBa
     /// <param name="id">The category identifier.</param>
     /// <returns>The category with HATEOAS links.</returns>
     [HttpGet("{id}", Name = nameof(GetCategoryById))]
+    [Authorize(Roles = "Manager,Customer")]
     [ProducesResponseType(typeof(LinkedResourceDto<CategoryDto>), StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     public async Task<IActionResult> GetCategoryById(int id)
@@ -46,6 +49,7 @@ public class CategoryController(ICategoryService categoryService) : ControllerBa
     /// </summary>
     /// <returns>A list of categories.</returns>
     [HttpGet(Name = nameof(GetCategories))]
+    [Authorize(Roles = "Manager,Customer")]
     [ProducesResponseType(typeof(List<CategoryDto>), StatusCodes.Status200OK)]
     public async Task<IActionResult> GetCategories()
     {
@@ -59,6 +63,7 @@ public class CategoryController(ICategoryService categoryService) : ControllerBa
     /// <param name="categoryDto">The category data.</param>
     /// <returns>The created category.</returns>
     [HttpPost(Name = nameof(CreateCategory))]
+    [Authorize(Roles = "Manager")]
     [ProducesResponseType(typeof(CategoryDto), StatusCodes.Status201Created)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     public async Task<IActionResult> CreateCategory(CategoryDto categoryDto)
@@ -72,6 +77,7 @@ public class CategoryController(ICategoryService categoryService) : ControllerBa
     /// </summary>
     /// <param name="categoryDto">The updated category data.</param>
     [HttpPut(Name = nameof(UpdateCategory))]
+    [Authorize(Roles = "Manager")]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
@@ -86,6 +92,7 @@ public class CategoryController(ICategoryService categoryService) : ControllerBa
     /// </summary>
     /// <param name="id">The category identifier.</param>
     [HttpDelete("{id}", Name = nameof(DeleteCategory))]
+    [Authorize(Roles = "Manager")]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     public async Task<IActionResult> DeleteCategory(int id)
