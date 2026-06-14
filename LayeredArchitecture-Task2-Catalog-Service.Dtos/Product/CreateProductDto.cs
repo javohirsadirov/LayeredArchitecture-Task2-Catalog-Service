@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace LayeredArchitecture_Task2_Catalog_Service.Dtos.Product;
+namespace CatalogService.Dtos.Product;
 
 public class CreateProductDto
 {
@@ -14,3 +14,4 @@ public class CreateProductDto
     [Range(0, int.MaxValue, ErrorMessage = "Amount cannot be negative.")]
     public required int Amount { get; set; }
 }
+

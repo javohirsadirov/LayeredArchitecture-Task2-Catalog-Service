@@ -1,9 +1,10 @@
-using LayeredArchitecture_Task2_Catalog_Service.MessageQueue.Implementation;
-using LayeredArchitecture_Task2_Catalog_Service.MessageQueue.Interfaces;
+using CatalogService.MessageQueue.Implementation;
+using CatalogService.MessageQueue.Interfaces;
+
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
 
-namespace LayeredArchitecture_Task2_Catalog_Service.MessageQueue;
+namespace CatalogService.MessageQueue;
 
 public static class MessageQueueServiceExtensions
 {

@@ -1,10 +1,11 @@
-using LayeredArchitecture_Task2_Catalog_Service.Business.Interfaces;
-using LayeredArchitecture_Task2_Catalog_Service.Dtos;
-using LayeredArchitecture_Task2_Catalog_Service.Dtos.Product;
+using CatalogService.Business.Interfaces;
+using CatalogService.Dtos;
+using CatalogService.Dtos.Product;
+
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
-namespace LayeredArchitecture_Task2_Catalog_Service.Controllers;
+namespace CatalogService.Controllers;
 
 /// <summary>
 /// Manages catalog products.
@@ -85,6 +86,7 @@ public class ProductController(IProductService productService) : ControllerBase
     /// Updates an existing product.
     /// </summary>
     /// <param name="productDto">The updated product data.</param>
+    /// <returns>No content if successful.</returns>
     [HttpPut(Name = nameof(UpdateProduct))]
     [Authorize(Roles = "Manager")]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
@@ -100,6 +102,7 @@ public class ProductController(IProductService productService) : ControllerBase
     /// Deletes a product by its identifier.
     /// </summary>
     /// <param name="id">The product identifier.</param>
+    /// <returns>No content if successful.</returns>
     [HttpDelete("{id}", Name = nameof(DeleteProduct))]
     [Authorize(Roles = "Manager")]
     [ProducesResponseType(StatusCodes.Status204NoContent)]

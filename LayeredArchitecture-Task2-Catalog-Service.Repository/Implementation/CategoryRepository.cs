@@ -1,9 +1,10 @@
-﻿using LayeredArchitecture_Task2_Catalog_Service.Business.Interfaces;
-using LayeredArchitecture_Task2_Catalog_Service.Dtos.Category;
-using LayeredArchitecture_Task2_Catalog_Service.Repository.Data;
+using CatalogService.Business.Interfaces;
+using CatalogService.Repository.Data;
+using CatalogService.Repository.Models;
+
 using Microsoft.EntityFrameworkCore;
 
-namespace LayeredArchitecture_Task2_Catalog_Service.Business.Implementation;
+namespace CatalogService.Business.Implementation;
 
 internal class CategoryRepository(CatalogDbContext context) : ICategoryRepository
 {

@@ -1,8 +1,8 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
+using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
-namespace LayeredArchitecture_Task2_Catalog_Service.Repository.Migrations
+namespace CatalogService.Repository.Migrations
 {
     /// <inheritdoc />
     public partial class InitialCreate : Migration
@@ -66,3 +66,4 @@ namespace LayeredArchitecture_Task2_Catalog_Service.Repository.Migrations
         }
     }
 }
+

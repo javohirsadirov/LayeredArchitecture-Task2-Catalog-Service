@@ -1,0 +1,92 @@
+root = true
+
+[*.cs]
+
+# ✅ Formatting
+indent_style = space
+indent_size = 4
+end_of_line = crlf
+
+# ✅ Using statements
+dotnet_sort_system_directives_first = true
+dotnet_separate_import_directive_groups = true
+
+# ✅ Naming conventions
+dotnet_naming_rule.private_fields_should_be_camel_case.severity = warning
+dotnet_naming_rule.private_fields_should_be_camel_case.symbols = private_fields
+dotnet_naming_rule.private_fields_should_be_camel_case.style = camel_case
+
+dotnet_naming_symbols.private_fields.applicable_kinds = field
+dotnet_naming_symbols.private_fields.applicable_accessibilities = private
+
+dotnet_naming_style.camel_case.capitalization = camel_case
+
+# ✅ VAR preferences
+csharp_style_var_for_built_in_types = true:suggestion
+csharp_style_var_when_type_is_apparent = true:suggestion
+
+# ✅ Braces
+csharp_prefer_braces = true:suggestion
+
+# ✅ Expression-bodied members
+csharp_style_expression_bodied_methods = false:suggestion
+
+# ✅ Additional rules (NON-default ones ✅)
+# 1. Missing async suffix
+dotnet_diagnostic.VSTHRD200.severity = warning
+
+# 2. Avoid unused parameters
+dotnet_diagnostic.CA1801.severity = warning
+
+# 3. Avoid empty catch blocks
+dotnet_diagnostic.CA1031.severity = warning
+csharp_indent_labels = one_less_than_current
+csharp_using_directive_placement = outside_namespace:silent
+csharp_prefer_simple_using_statement = true:suggestion
+csharp_style_namespace_declarations = block_scoped:silent
+csharp_style_prefer_method_group_conversion = true:silent
+csharp_style_prefer_top_level_statements = true:silent
+csharp_style_prefer_primary_constructors = true:suggestion
+csharp_prefer_system_threading_lock = true:suggestion
+csharp_style_expression_bodied_constructors = false:silent
+csharp_style_expression_bodied_operators = false:silent
+csharp_style_expression_bodied_properties = true:silent
+csharp_style_expression_bodied_indexers = true:silent
+csharp_style_expression_bodied_accessors = true:silent
+csharp_style_expression_bodied_lambdas = true:silent
+csharp_style_expression_bodied_local_functions = false:silent
+
+# ✅ StyleCop - Relaxed rules for modern C# style
+dotnet_diagnostic.SA1101.severity = none
+dotnet_diagnostic.SA1309.severity = warning
+dotnet_diagnostic.SA1000.severity = none
+dotnet_diagnostic.SA1116.severity = none
+dotnet_diagnostic.SA1202.severity = none
+dotnet_diagnostic.SA1507.severity = none
+dotnet_diagnostic.SA1518.severity = none
+dotnet_diagnostic.SA1633.severity = none
+dotnet_diagnostic.SA1600.severity = warning
+dotnet_diagnostic.SA1503.severity = none
+dotnet_diagnostic.SA1413.severity = none
+dotnet_diagnostic.SA1508.severity = none
+dotnet_diagnostic.SA1512.severity = none
+dotnet_diagnostic.SA1009.severity = none
+dotnet_diagnostic.SA1012.severity = none
+dotnet_diagnostic.SA1013.severity = none
+dotnet_diagnostic.SA1208.severity = warning
+dotnet_diagnostic.SA1615.severity = warning
+dotnet_diagnostic.SA1516.severity = none
+
+# ✅ Naming rules
+dotnet_diagnostic.CA1707.severity = warning
+
+# ✅ IDE rules
+dotnet_diagnostic.IDE0011.severity = suggestion
+
+[*.{cs,vb}]
+dotnet_style_operator_placement_when_wrapping = beginning_of_line
+tab_width = 4
+indent_size = 4
+end_of_line = crlf
+
+

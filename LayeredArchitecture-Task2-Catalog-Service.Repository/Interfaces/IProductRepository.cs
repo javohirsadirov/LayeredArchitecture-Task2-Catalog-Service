@@ -1,6 +1,6 @@
-﻿using LayeredArchitecture_Task2_Catalog_Service.Repository.Models;
+using CatalogService.Repository.Models;
 
-namespace LayeredArchitecture_Task2_Catalog_Service.Business.Interfaces;
+namespace CatalogService.Business.Interfaces;
 
 public interface IProductRepository
 {

@@ -1,20 +1,21 @@
-﻿using LayeredArchitecture_Task2_Catalog_Service.MessageQueue.Interfaces;
-using Microsoft.Extensions.Options;
-using RabbitMQ.Client;
 using System.Text;
 using System.Text.Json;
 
-namespace LayeredArchitecture_Task2_Catalog_Service.MessageQueue.Implementation;
+using CatalogService.MessageQueue.Interfaces;
+
+using RabbitMQ.Client;
+
+namespace CatalogService.MessageQueue.Implementation;
 
 internal class RabbitMQPublisher : IMessagePublisher, IAsyncDisposable
 {
-    private readonly IConnection _connection;
-    private readonly IChannel _channel;
+    private readonly IConnection connection;
+    private readonly IChannel channel;
 
     private RabbitMQPublisher(IConnection connection, IChannel channel)
     {
-        _connection = connection;
-        _channel = channel;
+        this.connection = connection;
+        this.channel = channel;
     }
 
     public static async Task<RabbitMQPublisher> CreateAsync(string hostName, int port, CancellationToken cancellationToken = default)
@@ -33,20 +34,20 @@ internal class RabbitMQPublisher : IMessagePublisher, IAsyncDisposable
 
     internal async Task EnsureTopologyAsync(string exchange, string queue, string routingKey, CancellationToken cancellationToken = default)
     {
-        await _channel.ExchangeDeclareAsync(
+        await channel.ExchangeDeclareAsync(
             exchange: exchange,
             type: ExchangeType.Direct,
             durable: true,
             cancellationToken: cancellationToken);
 
-        await _channel.QueueDeclareAsync(
+        await channel.QueueDeclareAsync(
             queue: queue,
             durable: true,
             exclusive: false,
             autoDelete: false,
             cancellationToken: cancellationToken);
 
-        await _channel.QueueBindAsync(
+        await channel.QueueBindAsync(
             queue: queue,
             exchange: exchange,
             routingKey: routingKey,
@@ -60,7 +61,7 @@ internal class RabbitMQPublisher : IMessagePublisher, IAsyncDisposable
 
         var properties = new BasicProperties { Persistent = true };
 
-        await _channel.BasicPublishAsync(
+        await channel.BasicPublishAsync(
             exchange: exchange,
             routingKey: routingKey,
             mandatory: false,
@@ -71,10 +72,10 @@ internal class RabbitMQPublisher : IMessagePublisher, IAsyncDisposable
 
     public async ValueTask DisposeAsync()
     {
-        await _channel.CloseAsync();
-        await _connection.CloseAsync();
-        _channel.Dispose();
-        _connection.Dispose();
+        await channel.CloseAsync();
+        await connection.CloseAsync();
+        channel.Dispose();
+        connection.Dispose();
         GC.SuppressFinalize(this);
     }
 }

@@ -1,6 +1,6 @@
-﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations;
 
-namespace LayeredArchitecture_Task2_Catalog_Service.Dtos.Product;
+namespace CatalogService.Dtos.Product;
 
 public class ProductDto
 {

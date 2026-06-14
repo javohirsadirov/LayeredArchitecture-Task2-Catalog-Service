@@ -1,4 +1,4 @@
-﻿namespace LayeredArchitecture_Task2_Catalog_Service.Dtos.Category;
+namespace CatalogService.Dtos.Category;
 
 public class CategoryDto
 {

@@ -1,8 +1,9 @@
-﻿using LayeredArchitecture_Task2_Catalog_Service.Business.Implementation;
-using LayeredArchitecture_Task2_Catalog_Service.Business.Interfaces;
+using CatalogService.Business.Implementation;
+using CatalogService.Business.Interfaces;
+
 using Microsoft.Extensions.DependencyInjection;
 
-namespace LayeredArchitecture_Task2_Catalog_Service.Business;
+namespace CatalogService.Business;
 
 public static class RegisterBusinessServices
 {

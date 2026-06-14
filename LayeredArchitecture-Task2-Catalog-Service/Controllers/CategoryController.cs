@@ -1,10 +1,11 @@
-using LayeredArchitecture_Task2_Catalog_Service.Business.Interfaces;
-using LayeredArchitecture_Task2_Catalog_Service.Dtos;
-using LayeredArchitecture_Task2_Catalog_Service.Dtos.Category;
+using CatalogService.Business.Interfaces;
+using CatalogService.Dtos;
+using CatalogService.Dtos.Category;
+
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
-namespace LayeredArchitecture_Task2_Catalog_Service.Controllers;
+namespace CatalogService.Controllers;
 
 /// <summary>
 /// Manages catalog categories.
@@ -27,7 +28,9 @@ public class CategoryController(ICategoryService categoryService) : ControllerBa
     {
         var result = await categoryService.GetById(id);
         if (result == null)
+        {
             return NotFound();
+        }
 
         var links = new List<LinkDto>();
         AddLink(links, Url.Link(nameof(GetCategoryById), new { id }), "self", "GET");
@@ -76,6 +79,7 @@ public class CategoryController(ICategoryService categoryService) : ControllerBa
     /// Updates an existing category.
     /// </summary>
     /// <param name="categoryDto">The updated category data.</param>
+    /// <returns>No content if successful.</returns>
     [HttpPut(Name = nameof(UpdateCategory))]
     [Authorize(Roles = "Manager")]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
@@ -91,6 +95,7 @@ public class CategoryController(ICategoryService categoryService) : ControllerBa
     /// Deletes a category and its related products.
     /// </summary>
     /// <param name="id">The category identifier.</param>
+    /// <returns>No content if successful.</returns>
     [HttpDelete("{id}", Name = nameof(DeleteCategory))]
     [Authorize(Roles = "Manager")]
     [ProducesResponseType(StatusCodes.Status204NoContent)]

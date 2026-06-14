@@ -1,4 +1,4 @@
-namespace LayeredArchitecture_Task2_Catalog_Service.Dtos;
+namespace CatalogService.Dtos;
 
 public class LinkDto
 {
@@ -6,3 +6,4 @@ public class LinkDto
     public string Rel { get; set; } = string.Empty;
     public string Method { get; set; } = string.Empty;
 }
+

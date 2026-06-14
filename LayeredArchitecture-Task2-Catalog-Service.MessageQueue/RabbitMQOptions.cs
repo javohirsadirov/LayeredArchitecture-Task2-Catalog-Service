@@ -1,4 +1,4 @@
-namespace LayeredArchitecture_Task2_Catalog_Service.MessageQueue;
+namespace CatalogService.MessageQueue;
 
 public class RabbitMQOptions
 {
@@ -15,3 +15,4 @@ public class ProductUpdatedSettings
     public string Queue { get; set; } = string.Empty;
     public string RoutingKey { get; set; } = string.Empty;
 }
+

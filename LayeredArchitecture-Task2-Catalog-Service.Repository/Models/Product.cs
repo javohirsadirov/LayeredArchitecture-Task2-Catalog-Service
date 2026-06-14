@@ -1,9 +1,9 @@
-﻿using LayeredArchitecture_Task2_Catalog_Service.Dtos.Category;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+
 using Microsoft.EntityFrameworkCore;
 
-namespace LayeredArchitecture_Task2_Catalog_Service.Repository.Models;
+namespace CatalogService.Repository.Models;
 
 public class Product
 {

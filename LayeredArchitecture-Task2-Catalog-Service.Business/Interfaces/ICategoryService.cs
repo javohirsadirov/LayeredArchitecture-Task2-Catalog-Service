@@ -1,6 +1,6 @@
-﻿using LayeredArchitecture_Task2_Catalog_Service.Dtos.Category;
+using CatalogService.Dtos.Category;
 
-namespace LayeredArchitecture_Task2_Catalog_Service.Business.Interfaces;
+namespace CatalogService.Business.Interfaces;
 
 public interface ICategoryService
 {

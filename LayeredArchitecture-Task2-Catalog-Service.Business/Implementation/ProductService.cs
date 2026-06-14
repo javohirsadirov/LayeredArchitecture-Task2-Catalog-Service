@@ -1,17 +1,18 @@
-﻿using LayeredArchitecture_Task2_Catalog_Service.Business.Interfaces;
-using LayeredArchitecture_Task2_Catalog_Service.Dtos.Product;
-using LayeredArchitecture_Task2_Catalog_Service.MessageQueue;
-using LayeredArchitecture_Task2_Catalog_Service.MessageQueue.Interfaces;
-using LayeredArchitecture_Task2_Catalog_Service.Repository.Models;
+using CatalogService.Business.Interfaces;
+using CatalogService.Dtos.Product;
+using CatalogService.MessageQueue;
+using CatalogService.MessageQueue.Interfaces;
+using CatalogService.Repository.Models;
+
 using Microsoft.Extensions.Options;
 
-namespace LayeredArchitecture_Task2_Catalog_Service.Business.Implementation;
+namespace CatalogService.Business.Implementation;
 
 internal class ProductService(IProductRepository productRepository,
     IMessagePublisher messagePublisher,
     IOptions<RabbitMQOptions> rabbitMQOptions) : IProductService
 {
-    private readonly ProductUpdatedSettings _productUpdatedSettings = rabbitMQOptions.Value.ProductUpdated;
+    private readonly ProductUpdatedSettings productUpdatedSettings = rabbitMQOptions.Value.ProductUpdated;
     public async Task<long> Create(CreateProductDto productDto)
     {
         var product = new Product
@@ -78,8 +79,8 @@ internal class ProductService(IProductRepository productRepository,
         if (updated)
         {
             await messagePublisher.PublishAsync(
-                _productUpdatedSettings.Exchange,
-                _productUpdatedSettings.RoutingKey,
+                productUpdatedSettings.Exchange,
+                productUpdatedSettings.RoutingKey,
                 new
                 {
                     Event = "ProductUpdated",

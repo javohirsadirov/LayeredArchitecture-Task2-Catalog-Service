@@ -1,13 +1,15 @@
-﻿using LayeredArchitecture_Task2_Catalog_Service.Business;
-using LayeredArchitecture_Task2_Catalog_Service.MessageQueue;
-using LayeredArchitecture_Task2_Catalog_Service.MessageQueue.Interfaces;
-using LayeredArchitecture_Task2_Catalog_Service.Middlewares;
-using LayeredArchitecture_Task2_Catalog_Service.Repository;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.OpenApi.Models;
 using System.Reflection;
 using System.Security.Claims;
 using System.Text.Json;
+
+using CatalogService.Business;
+using CatalogService.MessageQueue;
+using CatalogService.MessageQueue.Interfaces;
+using CatalogService.Middlewares;
+using CatalogService.Repository;
+
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -56,7 +58,7 @@ builder.Services.AddSwaggerGen(options =>
                     Id = "Bearer"
                 }
             },
-            new string[] {}
+            Array.Empty<string>()
         }
     });
 });
@@ -76,9 +78,12 @@ builder.Services.AddAuthentication("Bearer")
         {
             OnTokenValidated = context =>
             {
-                var identity = context.Principal.Identity as ClaimsIdentity;
+                if (context.Principal?.Identity is not ClaimsIdentity identity)
+                {
+                    return Task.CompletedTask;
+                }
 
-                var realmAccess = context.Principal.FindFirst("realm_access")?.Value;
+                var realmAccess = context.Principal?.FindFirst("realm_access")?.Value;
 
                 if (realmAccess != null)
                 {
@@ -88,7 +93,11 @@ builder.Services.AddAuthentication("Bearer")
 
                     foreach (var role in roles.EnumerateArray())
                     {
-                        identity.AddClaim(new Claim(ClaimTypes.Role, role.GetString()));
+                        var roleName = role.GetString();
+                        if (roleName is not null)
+                        {
+                            identity.AddClaim(new Claim(ClaimTypes.Role, roleName));
+                        }
                     }
                 }
 

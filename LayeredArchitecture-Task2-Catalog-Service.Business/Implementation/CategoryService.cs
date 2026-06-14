@@ -1,7 +1,9 @@
-﻿using LayeredArchitecture_Task2_Catalog_Service.Business.Interfaces;
-using LayeredArchitecture_Task2_Catalog_Service.Dtos.Category;
+using CatalogService.Business.Interfaces;
+using CatalogService.Dtos.Category;
+using CatalogService.Repository.Models;
 
-namespace LayeredArchitecture_Task2_Catalog_Service.Business.Implementation;
+
+namespace CatalogService.Business.Implementation;
 
 internal class CategoryService(ICategoryRepository categoryRepository) : ICategoryService
 {
@@ -36,13 +38,13 @@ internal class CategoryService(ICategoryRepository categoryRepository) : ICatego
     public async Task<List<CategoryDto>> GetList()
     {
         var categories = await categoryRepository.GetList();
-        return categories.Select(category => new CategoryDto
+        return [.. categories.Select(category => new CategoryDto
         {
             Id = category.Id,
             ImageURL = category.ImageURL,
             Name = category.Name,
             ParentCategoryId = category.ParentCategoryId
-        }).ToList();
+        })];
     }
 
     public async Task Update(CategoryDto categoryDto)

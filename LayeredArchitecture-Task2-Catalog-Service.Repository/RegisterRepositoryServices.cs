@@ -1,11 +1,12 @@
-﻿using LayeredArchitecture_Task2_Catalog_Service.Business.Implementation;
-using LayeredArchitecture_Task2_Catalog_Service.Business.Interfaces;
-using LayeredArchitecture_Task2_Catalog_Service.Repository.Data;
+using CatalogService.Business.Implementation;
+using CatalogService.Business.Interfaces;
+using CatalogService.Repository.Data;
+
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace LayeredArchitecture_Task2_Catalog_Service.Repository;
+namespace CatalogService.Repository;
 
 public static class RegisterRepositoryServices
 {

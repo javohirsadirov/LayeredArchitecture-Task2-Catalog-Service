@@ -1,8 +1,8 @@
-using LayeredArchitecture_Task2_Catalog_Service.Dtos.Category;
-using LayeredArchitecture_Task2_Catalog_Service.Repository.Models;
+using CatalogService.Repository.Models;
+
 using Microsoft.EntityFrameworkCore;
 
-namespace LayeredArchitecture_Task2_Catalog_Service.Repository.Data;
+namespace CatalogService.Repository.Data;
 
 public class CatalogDbContext : DbContext
 {
@@ -22,3 +22,4 @@ public class CatalogDbContext : DbContext
             .OnDelete(DeleteBehavior.Cascade);
     }
 }
+

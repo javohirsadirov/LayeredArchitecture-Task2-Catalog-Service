@@ -1,4 +1,4 @@
-﻿namespace LayeredArchitecture_Task2_Catalog_Service.MessageQueue.Interfaces;
+namespace CatalogService.MessageQueue.Interfaces;
 
 public interface IMessagePublisher : IAsyncDisposable
 {

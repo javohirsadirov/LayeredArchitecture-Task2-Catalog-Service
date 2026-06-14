@@ -1,16 +1,23 @@
-using LayeredArchitecture_Task2_Catalog_Service.Business.Implementation;
-using LayeredArchitecture_Task2_Catalog_Service.Dtos.Category;
-using LayeredArchitecture_Task2_Catalog_Service.Repository.Data;
+using CatalogService.Business.Implementation;
+using CatalogService.Repository.Data;
+using CatalogService.Repository.Models;
+
 using Microsoft.EntityFrameworkCore;
 
-namespace LayeredArchitecture_Task2_Catalog_Service.Tests;
+namespace CatalogService.Tests;
 
+/// <summary>
+/// Integration tests for the category repository.
+/// </summary>
 [TestFixture]
 public class CategoryRepositoryIntegrationTests
 {
-    private CatalogDbContext _context;
-    private CategoryRepository _repository;
+    private CatalogDbContext context;
+    private CategoryRepository repository;
 
+    /// <summary>
+    /// Initializes the database context and repository before each test.
+    /// </summary>
     [SetUp]
     public void SetUp()
     {
@@ -18,52 +25,69 @@ public class CategoryRepositoryIntegrationTests
             .UseSqlServer("Server=localhost;Database=CatalogDb;Trusted_Connection=True;TrustServerCertificate=True;")
             .Options;
 
-        _context = new CatalogDbContext(options);
-        _context.Database.EnsureCreated();
-        _repository = new CategoryRepository(_context);
+        context = new CatalogDbContext(options);
+        context.Database.EnsureCreated();
+        repository = new CategoryRepository(context);
     }
 
+    /// <summary>
+    /// Disposes the database context after each test.
+    /// </summary>
     [TearDown]
     public void TearDown()
     {
-        _context.Dispose();
+        context.Dispose();
     }
 
+    /// <summary>
+    /// Verifies that a created category can be retrieved by its identifier.
+    /// </summary>
+    /// <returns>A task representing the asynchronous test operation.</returns>
     [Test]
-    public async Task Create_And_GetById_ReturnsCreatedCategory()
+    public async Task CreateAndGetByIdReturnsCreatedCategory()
     {
         var category = new Category { Name = "Electronics", ImageURL = "electronics.png" };
 
-        await _repository.Create(category);
-        var result = await _repository.GetById((int)category.Id);
+        await repository.Create(category);
+        var result = await repository.GetById((int)category.Id);
 
-        Assert.That(result.Name, Is.EqualTo("Electronics"));
-        Assert.That(result.ImageURL, Is.EqualTo("electronics.png"));
+        Assert.Multiple(() =>
+        {
+            Assert.That(result.Name, Is.EqualTo("Electronics"));
+            Assert.That(result.ImageURL, Is.EqualTo("electronics.png"));
+        });
     }
 
-
+    /// <summary>
+    /// Verifies that updating a category modifies its data.
+    /// </summary>
+    /// <returns>A task representing the asynchronous test operation.</returns>
     [Test]
-    public async Task Update_ModifiesCategory()
+    public async Task UpdateModifiesCategory()
     {
         var category = new Category { Name = "Old Name" };
-        await _repository.Create(category);
+        await repository.Create(category);
 
         category.Name = "New Name";
-        await _repository.Update(category);
+        await repository.Update(category);
 
-        var result = await _repository.GetById((int)category.Id);
+        var result = await repository.GetById((int)category.Id);
         Assert.That(result.Name, Is.EqualTo("New Name"));
     }
 
+    /// <summary>
+    /// Verifies that deleting a category removes it from the database.
+    /// </summary>
+    /// <returns>A task representing the asynchronous test operation.</returns>
     [Test]
-    public async Task Delete_RemovesCategory()
+    public async Task DeleteRemovesCategory()
     {
         var category = new Category { Name = "ToDelete" };
-        await _repository.Create(category);
+        await repository.Create(category);
 
-        await _repository.Delete((int)category.Id);
+        await repository.Delete((int)category.Id);
 
         Assert.ThrowsAsync<KeyNotFoundException>(async () =>
-            await _repository.GetById((int)category.Id));
+            await repository.GetById((int)category.Id));
     }
 }

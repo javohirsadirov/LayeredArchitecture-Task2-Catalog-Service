@@ -1,23 +1,24 @@
-﻿namespace LayeredArchitecture_Task2_Catalog_Service.Middlewares;
+namespace CatalogService.Middlewares;
 
-public class TokenLoggingMiddleware
+/// <summary>
+/// Middleware that logs the Authorization token from incoming requests.
+/// </summary>
+public class TokenLoggingMiddleware(RequestDelegate next)
 {
-    private readonly RequestDelegate _next;
-
-    public TokenLoggingMiddleware(RequestDelegate next)
-    {
-        _next = next;
-    }
-
+    /// <summary>
+    /// Invokes the middleware to log the token and pass the request to the next middleware.
+    /// </summary>
+    /// <param name="context">The HTTP context.</param>
+    /// <returns>A task representing the asynchronous operation.</returns>
     public async Task Invoke(HttpContext context)
     {
-        var token = context.Request.Headers["Authorization"].FirstOrDefault();
+        var token = context.Request.Headers.Authorization.FirstOrDefault();
 
         if (!string.IsNullOrEmpty(token))
         {
             Console.WriteLine($"TOKEN: {token}");
         }
 
-        await _next(context);
+        await next(context);
     }
 }

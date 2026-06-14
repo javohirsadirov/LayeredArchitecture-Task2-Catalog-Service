@@ -1,30 +1,42 @@
-using LayeredArchitecture_Task2_Catalog_Service.Business.Implementation;
-using LayeredArchitecture_Task2_Catalog_Service.Business.Interfaces;
-using LayeredArchitecture_Task2_Catalog_Service.Dtos.Category;
+using CatalogService.Business.Implementation;
+using CatalogService.Business.Interfaces;
+using CatalogService.Dtos.Category;
+using CatalogService.Repository.Models;
+
 using Moq;
 
-namespace LayeredArchitecture_Task2_Catalog_Service.Tests;
+namespace CatalogService.Tests;
 
+/// <summary>
+/// Unit tests for the category service.
+/// </summary>
 [TestFixture]
 public class CategoryServiceTests
 {
-    private Mock<ICategoryRepository> _categoryRepositoryMock;
-    private ICategoryService _categoryService;
+    private Mock<ICategoryRepository> categoryRepositoryMock;
+    private ICategoryService categoryService;
 
+    /// <summary>
+    /// Initializes test dependencies before each test.
+    /// </summary>
     [SetUp]
     public void SetUp()
     {
-        _categoryRepositoryMock = new Mock<ICategoryRepository>();
-        _categoryService = new CategoryService(_categoryRepositoryMock.Object);
+        categoryRepositoryMock = new Mock<ICategoryRepository>();
+        categoryService = new CategoryService(categoryRepositoryMock.Object);
     }
 
+    /// <summary>
+    /// Verifies that GetById returns the correct category DTO.
+    /// </summary>
+    /// <returns>A task representing the asynchronous test operation.</returns>
     [Test]
-    public async Task GetById_ReturnsCorrectCategoryDto()
+    public async Task GetByIdReturnsCorrectCategoryDto()
     {
         var category = new Category { Id = 1, Name = "Electronics", ImageURL = "img.png", ParentCategoryId = null };
-        _categoryRepositoryMock.Setup(r => r.GetById(1)).ReturnsAsync(category);
+        categoryRepositoryMock.Setup(r => r.GetById(1)).ReturnsAsync(category);
 
-        var result = await _categoryService.GetById(1);
+        var result = await categoryService.GetById(1);
 
         Assert.That(result.Id, Is.EqualTo(1));
         Assert.That(result.Name, Is.EqualTo("Electronics"));
@@ -32,50 +44,67 @@ public class CategoryServiceTests
         Assert.That(result.ParentCategoryId, Is.Null);
     }
 
+    /// <summary>
+    /// Verifies that GetList returns all categories.
+    /// </summary>
+    /// <returns>A task representing the asynchronous test operation.</returns>
     [Test]
-    public async Task GetList_ReturnsAllCategories()
+    public async Task GetListReturnsAllCategories()
     {
         var categories = new List<Category>
         {
             new() { Id = 1, Name = "Electronics" },
             new() { Id = 2, Name = "Books" }
         };
-        _categoryRepositoryMock.Setup(r => r.GetList()).ReturnsAsync(categories);
+        categoryRepositoryMock.Setup(r => r.GetList()).ReturnsAsync(categories);
 
-        var result = await _categoryService.GetList();
+        var result = await categoryService.GetList();
 
         Assert.That(result, Has.Count.EqualTo(2));
         Assert.That(result[0].Name, Is.EqualTo("Electronics"));
         Assert.That(result[1].Name, Is.EqualTo("Books"));
     }
 
+    /// <summary>
+    /// Verifies that Create calls the repository Create method.
+    /// </summary>
+    /// <returns>A task representing the asynchronous test operation.</returns>
     [Test]
-    public async Task Create_CallsRepositoryCreate()
+    public async Task CreateCallsRepositoryCreate()
     {
         var dto = new CategoryDto { Name = "Toys", ImageURL = "toys.png", ParentCategoryId = null };
 
-        await _categoryService.Create(dto);
+        await categoryService.Create(dto);
 
-        _categoryRepositoryMock.Verify(r => r.Create(It.Is<Category>(c =>
+        categoryRepositoryMock.Verify(r => r.Create(It.Is<Category>(c =>
             c.Name == "Toys" && c.ImageURL == "toys.png")), Times.Once);
     }
 
+    /// <summary>
+    /// Verifies that Update calls the repository Update method.
+    /// </summary>
+    /// <returns>A task representing the asynchronous test operation.</returns>
     [Test]
-    public async Task Update_CallsRepositoryUpdate()
+    public async Task UpdateCallsRepositoryUpdate()
     {
         var dto = new CategoryDto { Id = 1, Name = "Updated", ImageURL = "updated.png", ParentCategoryId = 2 };
 
-        await _categoryService.Update(dto);
+        await categoryService.Update(dto);
 
-        _categoryRepositoryMock.Verify(r => r.Update(It.Is<Category>(c =>
+        categoryRepositoryMock.Verify(r => r.Update(It.Is<Category>(c =>
             c.Id == 1 && c.Name == "Updated" && c.ParentCategoryId == 2)), Times.Once);
     }
 
+    /// <summary>
+    /// Verifies that Delete calls the repository Delete method.
+    /// </summary>
+    /// <returns>A task representing the asynchronous test operation.</returns>
     [Test]
-    public async Task Delete_CallsRepositoryDelete()
+    public async Task DeleteCallsRepositoryDelete()
     {
-        await _categoryService.Delete(1);
+        await categoryService.Delete(1);
 
-        _categoryRepositoryMock.Verify(r => r.Delete(1), Times.Once);
+        categoryRepositoryMock.Verify(r => r.Delete(1), Times.Once);
     }
 }
+
