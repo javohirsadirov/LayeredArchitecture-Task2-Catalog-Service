@@ -1,0 +1,5 @@
+﻿C:\Users\JavohirSadirov\source\repos\LayeredArchitecture-Task2-Catalog-Service\LayeredArchitecture-Task2-Catalog-Service.Business\Implementation\CategoryService.cs
+C:\Users\JavohirSadirov\source\repos\LayeredArchitecture-Task2-Catalog-Service\LayeredArchitecture-Task2-Catalog-Service.Business\Implementation\ProductService.cs
+C:\Users\JavohirSadirov\source\repos\LayeredArchitecture-Task2-Catalog-Service\LayeredArchitecture-Task2-Catalog-Service.Business\Interfaces\ICategoryService.cs
+C:\Users\JavohirSadirov\source\repos\LayeredArchitecture-Task2-Catalog-Service\LayeredArchitecture-Task2-Catalog-Service.Business\Interfaces\IProductService.cs
+C:\Users\JavohirSadirov\source\repos\LayeredArchitecture-Task2-Catalog-Service\LayeredArchitecture-Task2-Catalog-Service.Business\RegisterBusinessServices.cs

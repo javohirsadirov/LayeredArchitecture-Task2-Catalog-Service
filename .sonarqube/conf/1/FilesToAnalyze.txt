@@ -1,0 +1,5 @@
+﻿C:\Users\JavohirSadirov\source\repos\LayeredArchitecture-Task2-Catalog-Service\LayeredArchitecture-Task2-Catalog-Service.Dtos\Category\CategoryDto.cs
+C:\Users\JavohirSadirov\source\repos\LayeredArchitecture-Task2-Catalog-Service\LayeredArchitecture-Task2-Catalog-Service.Dtos\LinkDto.cs
+C:\Users\JavohirSadirov\source\repos\LayeredArchitecture-Task2-Catalog-Service\LayeredArchitecture-Task2-Catalog-Service.Dtos\LinkedResourceDto.cs
+C:\Users\JavohirSadirov\source\repos\LayeredArchitecture-Task2-Catalog-Service\LayeredArchitecture-Task2-Catalog-Service.Dtos\Product\CreateProductDto.cs
+C:\Users\JavohirSadirov\source\repos\LayeredArchitecture-Task2-Catalog-Service\LayeredArchitecture-Task2-Catalog-Service.Dtos\Product\ProductDto.cs

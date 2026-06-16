@@ -1,0 +1,13 @@
+﻿C:\Users\JavohirSadirov\source\repos\LayeredArchitecture-Task2-Catalog-Service\LayeredArchitecture-Task2-Catalog-Service.Tests\CategoryRepositoryIntegrationTests.cs
+C:\Users\JavohirSadirov\source\repos\LayeredArchitecture-Task2-Catalog-Service\LayeredArchitecture-Task2-Catalog-Service.Tests\CategoryServiceTests.cs
+C:\Users\JavohirSadirov\source\repos\LayeredArchitecture-Task2-Catalog-Service\LayeredArchitecture-Task2-Catalog-Service.Tests\ProductRepositoryIntegrationTests.cs
+C:\Users\JavohirSadirov\source\repos\LayeredArchitecture-Task2-Catalog-Service\LayeredArchitecture-Task2-Catalog-Service.Tests\ProductServiceTests.cs
+C:\Users\JavohirSadirov\.nuget\packages\microsoft.net.test.sdk\17.12.0\build\netcoreapp3.1\Microsoft.NET.Test.Sdk.Program.cs
+C:\Users\JavohirSadirov\.nuget\packages\microsoft.testplatform.testhost\17.12.0\build\netcoreapp3.1\x64\testhost.exe
+C:\Users\JavohirSadirov\.nuget\packages\microsoft.testplatform.testhost\17.12.0\build\netcoreapp3.1\x64\testhost.dll
+C:\Users\JavohirSadirov\.nuget\packages\nunit3testadapter\4.6.0\build\netcoreapp3.1\NUnit3.TestAdapter.dll
+C:\Users\JavohirSadirov\.nuget\packages\nunit3testadapter\4.6.0\build\netcoreapp3.1\NUnit3.TestAdapter.pdb
+C:\Users\JavohirSadirov\.nuget\packages\nunit3testadapter\4.6.0\build\netcoreapp3.1\nunit.engine.dll
+C:\Users\JavohirSadirov\.nuget\packages\nunit3testadapter\4.6.0\build\netcoreapp3.1\nunit.engine.api.dll
+C:\Users\JavohirSadirov\.nuget\packages\nunit3testadapter\4.6.0\build\netcoreapp3.1\nunit.engine.core.dll
+C:\Users\JavohirSadirov\.nuget\packages\nunit3testadapter\4.6.0\build\netcoreapp3.1\testcentric.engine.metadata.dll

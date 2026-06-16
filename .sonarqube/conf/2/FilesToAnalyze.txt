@@ -1,0 +1,11 @@
+﻿C:\Users\JavohirSadirov\source\repos\LayeredArchitecture-Task2-Catalog-Service\LayeredArchitecture-Task2-Catalog-Service.Repository\Data\CatalogDbContext.cs
+C:\Users\JavohirSadirov\source\repos\LayeredArchitecture-Task2-Catalog-Service\LayeredArchitecture-Task2-Catalog-Service.Repository\Implementation\CategoryRepository.cs
+C:\Users\JavohirSadirov\source\repos\LayeredArchitecture-Task2-Catalog-Service\LayeredArchitecture-Task2-Catalog-Service.Repository\Implementation\ProductRepository.cs
+C:\Users\JavohirSadirov\source\repos\LayeredArchitecture-Task2-Catalog-Service\LayeredArchitecture-Task2-Catalog-Service.Repository\Interfaces\ICategoryRepository.cs
+C:\Users\JavohirSadirov\source\repos\LayeredArchitecture-Task2-Catalog-Service\LayeredArchitecture-Task2-Catalog-Service.Repository\Interfaces\IProductRepository.cs
+C:\Users\JavohirSadirov\source\repos\LayeredArchitecture-Task2-Catalog-Service\LayeredArchitecture-Task2-Catalog-Service.Repository\Migrations\20260422174705_InitialCreate.cs
+C:\Users\JavohirSadirov\source\repos\LayeredArchitecture-Task2-Catalog-Service\LayeredArchitecture-Task2-Catalog-Service.Repository\Migrations\20260422174705_InitialCreate.Designer.cs
+C:\Users\JavohirSadirov\source\repos\LayeredArchitecture-Task2-Catalog-Service\LayeredArchitecture-Task2-Catalog-Service.Repository\Migrations\CatalogDbContextModelSnapshot.cs
+C:\Users\JavohirSadirov\source\repos\LayeredArchitecture-Task2-Catalog-Service\LayeredArchitecture-Task2-Catalog-Service.Repository\Models\Category.cs
+C:\Users\JavohirSadirov\source\repos\LayeredArchitecture-Task2-Catalog-Service\LayeredArchitecture-Task2-Catalog-Service.Repository\Models\Product.cs
+C:\Users\JavohirSadirov\source\repos\LayeredArchitecture-Task2-Catalog-Service\LayeredArchitecture-Task2-Catalog-Service.Repository\RegisterRepositoryServices.cs

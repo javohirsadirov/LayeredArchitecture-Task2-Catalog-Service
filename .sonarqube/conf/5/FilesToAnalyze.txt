@@ -1,0 +1,11 @@
+﻿C:\Users\JavohirSadirov\source\repos\LayeredArchitecture-Task2-Catalog-Service\LayeredArchitecture-Task2-Catalog-Service\Controllers\CategoryController.cs
+C:\Users\JavohirSadirov\source\repos\LayeredArchitecture-Task2-Catalog-Service\LayeredArchitecture-Task2-Catalog-Service\Controllers\ProductController.cs
+C:\Users\JavohirSadirov\source\repos\LayeredArchitecture-Task2-Catalog-Service\LayeredArchitecture-Task2-Catalog-Service\Middlewares\TokenLoggingMiddleware.cs
+C:\Users\JavohirSadirov\source\repos\LayeredArchitecture-Task2-Catalog-Service\LayeredArchitecture-Task2-Catalog-Service\Program.cs
+C:\Users\JavohirSadirov\source\repos\LayeredArchitecture-Task2-Catalog-Service\LayeredArchitecture-Task2-Catalog-Service\obj\Debug\net9.0\LayeredArchitecture-Task2-Catalog-Service.API.GlobalUsings.g.cs
+C:\Users\JavohirSadirov\source\repos\LayeredArchitecture-Task2-Catalog-Service\LayeredArchitecture-Task2-Catalog-Service\obj\Debug\net9.0\.NETCoreApp,Version=v9.0.AssemblyAttributes.cs
+C:\Users\JavohirSadirov\source\repos\LayeredArchitecture-Task2-Catalog-Service\LayeredArchitecture-Task2-Catalog-Service\obj\Debug\net9.0\LayeredArchitecture-Task2-Catalog-Service.API.AssemblyInfo.cs
+C:\Users\JavohirSadirov\source\repos\LayeredArchitecture-Task2-Catalog-Service\LayeredArchitecture-Task2-Catalog-Service\obj\Debug\net9.0\LayeredArchitecture-Task2-Catalog-Service.API.MvcApplicationPartsAssemblyInfo.cs
+C:\Users\JavohirSadirov\source\repos\LayeredArchitecture-Task2-Catalog-Service\LayeredArchitecture-Task2-Catalog-Service\appsettings.Development.json
+C:\Users\JavohirSadirov\source\repos\LayeredArchitecture-Task2-Catalog-Service\LayeredArchitecture-Task2-Catalog-Service\appsettings.json
+C:\Users\JavohirSadirov\source\repos\LayeredArchitecture-Task2-Catalog-Service\LayeredArchitecture-Task2-Catalog-Service\Properties\launchSettings.json
