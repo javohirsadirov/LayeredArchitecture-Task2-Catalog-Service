@@ -1,0 +1,12 @@
+**/.dockerignore    # Excludes .dockerignore files from the build context.
+**/.env             # Excludes environment variable files (may contain secrets).
+**/.git             # Excludes the Git history — not needed for building.
+**/.gitignore       # Excludes .gitignore files.
+**/.vs              # Excludes Visual Studio settings folder.
+**/bin              # Excludes compiled output — the container builds from source.
+**/obj              # Excludes intermediate build files.
+**/docker-compose*  # Excludes docker-compose files — not needed inside the image.
+**/Dockerfile*      # Excludes Dockerfile(s) — not needed inside the image.
+**/*.user           # Excludes VS user-specific settings files.
+**/*.suo            # Excludes VS solution user options files.
+**/node_modules     # Excludes Node.js dependencies (if any frontend tooling exists).

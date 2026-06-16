@@ -66,7 +66,7 @@ builder.Services.AddAuthorization();
 builder.Services.AddAuthentication("Bearer")
     .AddJwtBearer("Bearer", options =>
     {
-        options.Authority = "http://localhost:8080/realms/store-realm";
+        options.Authority = builder.Configuration["Keycloak:Authority"] ?? "http://localhost:8080/realms/store-realm";
         options.RequireHttpsMetadata = false;
 
         options.TokenValidationParameters = new Microsoft.IdentityModel.Tokens.TokenValidationParameters

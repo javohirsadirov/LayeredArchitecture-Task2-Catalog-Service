@@ -1,0 +1,87 @@
+﻿services:
+# Top-level key that defines all the containers (services) to run together.
+
+  sqlserver:
+  # Defines the SQL Server service.
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    # Uses the official SQL Server 2022 Linux image from Microsoft.
+    container_name: catalog-sqlserver
+    # Names the container "catalog-sqlserver" for easy reference.
+    ports:
+      - "1433:1433"
+    # Maps host port 1433 to container port 1433 (SQL Server default port).
+    environment:
+      ACCEPT_EULA: "Y"
+      # Accepts the SQL Server license agreement (required to start).
+      MSSQL_SA_PASSWORD: YourStrong!Passw0rd
+      # Sets the "sa" (system admin) password for SQL Server.
+    volumes:
+      - sqlserver_data:/var/opt/mssql
+    # Persists SQL Server data to a named volume so data survives container restarts.
+
+  rabbitmq:
+  # Defines the RabbitMQ message broker service.
+    image: rabbitmq:3-management
+    # Uses RabbitMQ 3.x with the management UI plugin enabled.
+    container_name: catalog-rabbitmq
+    ports:
+      - "5672:5672"
+      # Maps the AMQP protocol port (used by the app to send/receive messages).
+      - "15672:15672"
+      # Maps the management UI port (accessible at http://localhost:15672).
+    environment:
+      RABBITMQ_DEFAULT_USER: guest
+      RABBITMQ_DEFAULT_PASS: guest
+      # Sets the default username and password for RabbitMQ.
+    volumes:
+      - rabbitmq_data:/var/lib/rabbitmq
+    # Persists RabbitMQ data (queues, messages) across container restarts.
+
+  keycloak:
+  # Defines the Keycloak identity/authentication server.
+    image: quay.io/keycloak/keycloak:latest
+    # Uses the latest official Keycloak image.
+    container_name: catalog-keycloak
+    ports:
+      - "8080:8080"
+    # Maps Keycloak's web UI and API to host port 8080.
+    environment:
+      KEYCLOAK_ADMIN: admin
+      KEYCLOAK_ADMIN_PASSWORD: admin
+      # Sets the initial admin credentials for the Keycloak admin console.
+    command: start-dev
+    # Starts Keycloak in development mode (no HTTPS required, in-memory H2 DB by default).
+    volumes:
+      - keycloak_data:/opt/keycloak/data
+    # Persists Keycloak configuration and realm data.
+
+  catalog-service:
+  # Defines your .NET Catalog Service API.
+    build:
+      context: .
+      # Sets the build context to the repository root directory.
+      dockerfile: Dockerfile
+      # Uses the Dockerfile at the root to build the image.
+    container_name: catalog-service
+    ports:
+      - "8081:8080"
+    # Maps host port 8081 to the container's port 8080 (where ASP.NET listens).
+    # Port 8080 on the host is already taken by Keycloak, so 8081 is used instead.
+    environment:
+      ASPNETCORE_ENVIRONMENT: Docker
+      # Sets the environment to "Docker", which loads appsettings.Docker.json.
+      # That file overrides connection strings to use container names
+      # (e.g., "sqlserver" instead of "localhost").
+    depends_on:
+      - sqlserver
+      - rabbitmq
+      - keycloak
+    # Ensures SQL Server, RabbitMQ, and Keycloak containers start before this one.
+    # Note: this only controls startup order, not readiness.
+
+volumes:
+# Declares named volumes for persistent storage.
+  sqlserver_data:
+  rabbitmq_data:
+  keycloak_data:
+  # Docker manages these volumes. Data persists even if containers are removed.
